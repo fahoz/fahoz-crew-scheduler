@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ekip Yönetimi | Fahoz Air Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-slot"></div>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1>Ekip Yönetimi</h1>
+          <div class="topbar-sub">Personel listesi, roller ve haftalık uçuş saatleri</div>
+        </div>
+        <button class="btn btn-primary" id="btn-open-add-crew">+ Yeni Personel</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ad Soyad</th>
+              <th>Rol</th>
+              <th>E-posta</th>
+              <th>Durum</th>
+              <th>Toplam Uçuş Saati</th>
+              <th>Haftalık Limit</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="crew-table-body">
+            <tr><td colspan="8" class="empty-state">Yükleniyor...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Yeni Personel Modal -->
+  <div class="modal-backdrop" id="add-crew-modal" style="display:none;">
+    <div class="modal">
+      <h3>Yeni Personel Ekle</h3>
+      <form id="add-crew-form">
+        <div class="form-grid">
+          <div class="field">
+            <label>Ad Soyad</label>
+            <input type="text" name="name" required placeholder="Örn: Ahmet Yılmaz" />
+          </div>
+          <div class="field">
+            <label>E-posta</label>
+            <input type="email" name="email" required placeholder="ornek@tredia-air.com" />
+          </div>
+          <div class="field">
+            <label>Rol</label>
+            <select name="role" required>
+              <option value="PILOT">Pilot</option>
+              <option value="CO_PILOT">Co-Pilot</option>
+              <option value="CABIN_CHIEF">Kabin Amiri</option>
+              <option value="FLIGHT_ATTENDANT">Hostes / Kabin Memuru</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Haftalık Mesai Limiti (saat)</label>
+            <input type="number" name="weeklyLimitHours" value="40" min="1" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="btn-cancel-add-crew">Vazgeç</button>
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Personel Düzenle Modal -->
+  <div class="modal-backdrop" id="edit-crew-modal" style="display:none;">
+    <div class="modal">
+      <h3>Personel Bilgilerini Düzenle</h3>
+      <form id="edit-crew-form">
+        <input type="hidden" name="id" />
+        <div class="form-grid">
+          <div class="field">
+            <label>Ad Soyad</label>
+            <input type="text" name="name" required />
+          </div>
+          <div class="field">
+            <label>E-posta</label>
+            <input type="email" name="email" required />
+          </div>
+          <div class="field">
+            <label>Rol</label>
+            <select name="role" required>
+              <option value="PILOT">Pilot</option>
+              <option value="CO_PILOT">Co-Pilot</option>
+              <option value="CABIN_CHIEF">Kabin Amiri</option>
+              <option value="FLIGHT_ATTENDANT">Hostes / Kabin Memuru</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Haftalık Mesai Limiti (saat)</label>
+            <input type="number" name="weeklyLimitHours" min="1" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="btn-cancel-edit-crew">Vazgeç</button>
+          <button type="submit" class="btn btn-primary">Güncelle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script>requireAuth();</script>
+  <script src="../js/api.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/crew.js"></script>
+</body>
+</html>

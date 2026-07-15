@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Fahoz Air Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-slot"></div>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1>Dashboard</h1>
+          <div class="topbar-sub">Havalimanı operasyon özeti — bugünkü durum</div>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="stat-grid">
+        <div class="stat-card">
+          <div class="stat-accent navy"></div>
+          <div class="stat-label">Toplam Aktif Uçuş</div>
+          <div class="stat-value" id="stat-active-flights">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-accent teal"></div>
+          <div class="stat-label">Müsait Pilot Sayısı</div>
+          <div class="stat-value" id="stat-available-pilots">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-accent gold"></div>
+          <div class="stat-label">Toplam Personel</div>
+          <div class="stat-value" id="stat-total-crew">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-accent danger"></div>
+          <div class="stat-label">Bugünkü Uçuş Sayısı</div>
+          <div class="stat-value" id="stat-today-flights">—</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h2>Bugünkü Uçuşlar</h2>
+      </div>
+      <div id="today-flights-container">
+        <div class="empty-state">Yükleniyor...</div>
+      </div>
+
+      <div class="section-header mt-16">
+        <h2>Son İşlemler</h2>
+      </div>
+      <div class="table-wrap" id="recent-activity-wrap">
+        <div class="empty-state">Yükleniyor...</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>requireAuth();</script>
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

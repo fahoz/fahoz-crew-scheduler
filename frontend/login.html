@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Yap | Fahoz Air Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .login-box {
+      width: 360px;
+      max-width: 90vw;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .login-brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .login-brand .name { font-size: 18px; font-weight: 700; }
+    .login-brand .sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .login-error {
+      background: rgba(92, 31, 40, 0.2);
+      border: 1px solid rgba(92, 31, 40, 0.5);
+      color: var(--danger-text);
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      font-size: 12.5px;
+      margin-bottom: 14px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="login-brand">
+      <div class="name">Fahoz Air Ops</div>
+      <div class="sub">Crew Schedule System</div>
+    </div>
+
+    <div class="login-error" id="login-error">Kullanıcı adı veya şifre hatalı.</div>
+
+    <form id="login-form">
+      <div class="field mb-16">
+        <label>Kullanıcı Adı</label>
+        <input type="text" name="username" required autocomplete="username" />
+      </div>
+      <div class="field mb-16">
+        <label>Şifre</label>
+        <input type="password" name="password" required autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Giriş Yap</button>
+    </form>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      const ok = attemptLogin(form.get("username"), form.get("password"));
+      if (ok) {
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("login-error").style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

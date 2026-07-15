@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATC Kontrol Kulesi | Fahoz Air Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-slot"></div>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1>ATC Kontrol Kulesi</h1>
+          <div class="topbar-sub">Uçuşları kalkış/iniş aşamalarında ilerletin ve hava durumunu izleyin</div>
+        </div>
+      </div>
+
+      <div id="atc-flights-container">
+        <div class="empty-state">Yükleniyor...</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script>requireAuth();</script>
+  <script src="../js/api.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/atc.js"></script>
+</body>
+</html>

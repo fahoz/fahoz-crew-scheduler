@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uçuş Planlama & Atama | Fahoz Air Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <div id="sidebar-slot"></div>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1>Uçuş Planlama & Atama</h1>
+          <div class="topbar-sub">Uçuş seçin, müsait personeli görün ve tek tıkla atayın</div>
+        </div>
+        <button class="btn btn-primary" id="btn-open-add-flight">+ Yeni Uçuş</button>
+      </div>
+
+      <div class="two-col">
+        <!-- Sol: Uçuş Listesi -->
+        <div>
+          <div class="section-header"><h2>Uçuşlar</h2></div>
+          <div class="filter-bar">
+            <input type="text" id="filter-search" placeholder="Uçuş kodu / güzergah ara..." />
+            <select id="filter-status">
+              <option value="">Tüm Durumlar</option>
+              <option value="PLANNED">Planlandı</option>
+              <option value="READY">Hazır</option>
+              <option value="TAXI">Taksi</option>
+              <option value="CLEARED_TAKEOFF">Kalkışa İzin Verildi</option>
+              <option value="AIRBORNE">Havada</option>
+              <option value="CLEARED_LANDING">İnişe İzin Verildi</option>
+              <option value="COMPLETED">Tamamlandı</option>
+              <option value="CANCELLED">İptal</option>
+            </select>
+            <button class="btn btn-ghost btn-sm" id="btn-clear-filters">Filtreleri Temizle</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kod</th>
+                  <th>Güzergah</th>
+                  <th>Kalkış</th>
+                  <th>Durum</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="flights-table-body">
+                <tr><td colspan="6" class="empty-state">Yükleniyor...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sağ: Seçili uçuş detayı + atama paneli -->
+        <div>
+          <div class="section-header"><h2>Atama Paneli</h2></div>
+          <div class="card" id="assignment-panel">
+            <div class="empty-state">Atama yapmak için soldan bir uçuş seçin.</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Yeni Uçuş Modal -->
+  <div class="modal-backdrop" id="add-flight-modal" style="display:none;">
+    <div class="modal">
+      <h3>Yeni Uçuş Ekle</h3>
+      <form id="add-flight-form">
+        <div class="form-grid">
+          <div class="field">
+            <label>Uçuş Kodu</label>
+            <input type="text" name="flightCode" required placeholder="Örn: TK1920" />
+          </div>
+          <div class="field">
+            <label>Kalkış Yeri</label>
+            <input type="text" name="origin" required placeholder="IST" />
+          </div>
+          <div class="field">
+            <label>Varış Yeri</label>
+            <input type="text" name="destination" required placeholder="LHR" />
+          </div>
+          <div class="field">
+            <label>Kalkış Zamanı</label>
+            <input type="datetime-local" name="departureTime" required />
+          </div>
+          <div class="field">
+            <label>Varış Zamanı</label>
+            <input type="datetime-local" name="arrivalTime" required />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="btn-cancel-add-flight">Vazgeç</button>
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Uçuş Düzenle Modal -->
+  <div class="modal-backdrop" id="edit-flight-modal" style="display:none;">
+    <div class="modal">
+      <h3>Uçuş Bilgilerini Düzenle</h3>
+      <form id="edit-flight-form">
+        <input type="hidden" name="id" />
+        <div class="form-grid">
+          <div class="field">
+            <label>Uçuş Kodu</label>
+            <input type="text" name="flightCode" required />
+          </div>
+          <div class="field">
+            <label>Kalkış Yeri</label>
+            <input type="text" name="origin" required />
+          </div>
+          <div class="field">
+            <label>Varış Yeri</label>
+            <input type="text" name="destination" required />
+          </div>
+          <div class="field">
+            <label>Kalkış Zamanı</label>
+            <input type="datetime-local" name="departureTime" required />
+          </div>
+          <div class="field">
+            <label>Varış Zamanı</label>
+            <input type="datetime-local" name="arrivalTime" required />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="btn-cancel-edit-flight">Vazgeç</button>
+          <button type="submit" class="btn btn-primary">Güncelle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script>requireAuth();</script>
+  <script src="../js/api.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/flights.js"></script>
+</body>
+</html>
